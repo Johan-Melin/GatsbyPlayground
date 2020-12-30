@@ -50,5 +50,15 @@ module.exports = {
     },
     `gatsby-plugin-offline`,
     `gatsby-plugin-react-helmet`,
+    {
+      resolve: 'gatsby-source-prismic',
+      options: {
+        repositoryName: 'HallandTest',
+        schemas: {
+          text_content: require('./src/schemas/text_content.json'),
+        },
+      },
+    },
   ],
+
 }
