@@ -1,7 +1,6 @@
 import React from "react"
 import { css } from "@emotion/react"
 import { Link, graphql } from "gatsby"
-import { rhythm } from "../utils/typography"
 import Layout from "../components/layout"
 export default function Home({ data }) {
   return (
@@ -16,8 +15,18 @@ export default function Home({ data }) {
           Amazing Pandas Eating Things
         </h1>
         <h4>{data.allPrismicTextContent.totalCount} Posts</h4>
-        {data.allPrismicTextContent.nodes.map(({ data }) => (
+        {data.allPrismicTextContent.nodes.map(({data, uid, id}) => (
+           <div key={id}>
+           <Link
+             to={uid}
+             css={css`
+               text-decoration: none;
+               color: inherit;
+             `}
+           >
               <p>{data.text_field.text}</p>
+            </Link>
+          </div>
         ))}
       </div>
     </Layout>
@@ -32,6 +41,8 @@ query MyQuery {
           text
         }
       }
+      id
+      uid
     }
     totalCount
   }
